@@ -30,8 +30,8 @@ int main() {
             PORTB ^= 1 << p;    // Set all pins
 
             // Calculate and sort delays and pins
-            a = p / 6;
-            delay = tri(t, a);
+            double a = p / 6;
+            double delay = tri(t, a);
             for (int i = 0; i < 6; i++) {
                 if (delays[i] < 0) {
                     pins[i] = p;
