@@ -20,44 +20,44 @@ float tri(double t, double a) {
 
 int main() {
     DDRB = 0b111111;    // Declare Port B as output
+    double t = 0;       // Elapsed time [ms]
 
     while(true) {
-        for (float t = 0; t < T; t++) {
-            int pins[6] = {-1, -1, -1, -1, -1};
-            double delays[6] = {-1, -1, -1, -1, -1};
+        int pins[6] = {-1, -1, -1, -1, -1};
+        double delays[6] = {-1, -1, -1, -1, -1};
 
-            for (int p = PB0; p <= PB5; p++) {
-                PORTB ^= 1 << p;    // Set all pins
+        for (int p = PB0; p <= PB5; p++) {
+            PORTB ^= 1 << p;    // Set all pins
 
-                // Calculate and sort delays and pins
-                a = p / 6;
-                delay = tri(t, a);
-                for (int i = 0; i < 6; i++) {
-                    if (delays[i] < 0) {
-                        pins[i] = p;
-                        delays[i] = delays;
-                    } else if (delays[i] > delay) {
-                        for (int j = 6; j > i; j--) {
-                            delays[j] = delays[j - 1];
-                            pins[j] = pins[j - 1];
-                        }
-                        pins[i] = p;
-                        delays[i] = delays;
+            // Calculate and sort delays and pins
+            a = p / 6;
+            delay = tri(t, a);
+            for (int i = 0; i < 6; i++) {
+                if (delays[i] < 0) {
+                    pins[i] = p;
+                    delays[i] = delays;
+                } else if (delays[i] > delay) {
+                    for (int j = 6; j > i; j--) {
+                        delays[j] = delays[j - 1];
+                        pins[j] = pins[j - 1];
                     }
+                    pins[i] = p;
+                    delays[i] = delays;
                 }
             }
-
-            // Clear all pins after the correspoinding delay.
-            double d = 0;
-            for (int i = 0; i < 6; i++) {
-                PORTB &= 0 << pins[i];
-                d += delays[i];
-                _delay_ms(delays[i]);
-            }
-
-            // Wait for the millisecond to be over
-            _delay_ms(1 - d);
         }
+
+        // Clear all pins after the correspoinding delay.
+        double d = 0;
+        for (int i = 0; i < 6; i++) {
+            PORTB &= 0 << pins[i];
+            d += delays[i];
+            _delay_ms(delays[i]);
+        }
+
+        // Wait for the millisecond to be over (and increment `t` by one)
+        _delay_ms(1 - d);
+        t++;
     }
 
     return 0;
