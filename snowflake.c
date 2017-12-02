@@ -8,14 +8,9 @@ Triangle wave function
 t = time (independent variable). [ms]
 a = angle = offset / T. [1]
 */
-float tri(double t, double a) {
-    t = t % T + a * T     // Adjust `t` to be in first period, add offset.
-    switch ((int) (t / T * 2)) {
-        case 0:
-            return t / T      // In first half-period: Linear grow
-        case 1:
-            return 1 - t/T    // In second half-period: Linear fall
-    }
+double tri(double t, double a) {
+    t = (int) t % T + a * T;                                 // Adjust `t` to be in first period, add offset.
+    return (int) (t / T * 2) ? 2 - 2 * t / T : 2 * t / T;    // First half-period: linear grow, second: linear fall
 }
 
 int main() {
@@ -47,7 +42,7 @@ int main() {
             }
         }
 
-        // Clear all pins after the correspoinding delay.
+        // Clear all pins after the corresponding delay.
         double d = 0;
         for (int i = 0; i < 6; i++) {
             PORTB &= 0 << pins[i];
