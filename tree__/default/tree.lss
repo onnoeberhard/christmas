@@ -1,0 +1,813 @@
+
+tree.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000003c6  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .debug_aranges 00000020  00000000  00000000  0000041a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  2 .debug_pubnames 0000001b  00000000  00000000  0000043a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_info   00000a0e  00000000  00000000  00000455  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 000000f4  00000000  00000000  00000e63  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_line   0000057a  00000000  00000000  00000f57  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_frame  00000020  00000000  00000000  000014d4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    000000ab  00000000  00000000  000014f4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_loc    000005f0  00000000  00000000  0000159f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_ranges 000006d8  00000000  00000000  00001b8f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	09 c0       	rjmp	.+18     	; 0x14 <__ctors_end>
+   2:	0e c0       	rjmp	.+28     	; 0x20 <__bad_interrupt>
+   4:	0d c0       	rjmp	.+26     	; 0x20 <__bad_interrupt>
+   6:	0c c0       	rjmp	.+24     	; 0x20 <__bad_interrupt>
+   8:	0b c0       	rjmp	.+22     	; 0x20 <__bad_interrupt>
+   a:	0a c0       	rjmp	.+20     	; 0x20 <__bad_interrupt>
+   c:	09 c0       	rjmp	.+18     	; 0x20 <__bad_interrupt>
+   e:	08 c0       	rjmp	.+16     	; 0x20 <__bad_interrupt>
+  10:	07 c0       	rjmp	.+14     	; 0x20 <__bad_interrupt>
+  12:	06 c0       	rjmp	.+12     	; 0x20 <__bad_interrupt>
+
+00000014 <__ctors_end>:
+  14:	11 24       	eor	r1, r1
+  16:	1f be       	out	0x3f, r1	; 63
+  18:	cf e9       	ldi	r28, 0x9F	; 159
+  1a:	cd bf       	out	0x3d, r28	; 61
+  1c:	02 d0       	rcall	.+4      	; 0x22 <main>
+  1e:	d1 c1       	rjmp	.+930    	; 0x3c2 <_exit>
+
+00000020 <__bad_interrupt>:
+  20:	ef cf       	rjmp	.-34     	; 0x0 <__vectors>
+
+00000022 <main>:
+#include <avr/io.h>
+#define F_CPU 1000000         // Internal clock at 1MHz
+#include <util/delay.h>
+
+int main() {
+  22:	2f 92       	push	r2
+  24:	3f 92       	push	r3
+  26:	4f 92       	push	r4
+  28:	5f 92       	push	r5
+  2a:	6f 92       	push	r6
+  2c:	7f 92       	push	r7
+  2e:	8f 92       	push	r8
+  30:	9f 92       	push	r9
+  32:	af 92       	push	r10
+  34:	bf 92       	push	r11
+  36:	cf 92       	push	r12
+  38:	df 92       	push	r13
+  3a:	ef 92       	push	r14
+  3c:	ff 92       	push	r15
+  3e:	0f 93       	push	r16
+  40:	1f 93       	push	r17
+  42:	cf 93       	push	r28
+  44:	df 93       	push	r29
+    DDRB = 0xFF;     // Declare Port B as output
+  46:	8f ef       	ldi	r24, 0xFF	; 255
+  48:	87 bb       	out	0x17, r24	; 23
+	PORTB = 0x00;    // Turn all LEDs off
+  4a:	18 ba       	out	0x18, r1	; 24
+  4c:	20 e0       	ldi	r18, 0x00	; 0
+  4e:	30 e0       	ldi	r19, 0x00	; 0
+
+	while(1) {
+		for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+  50:	41 e0       	ldi	r20, 0x01	; 1
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+  52:	a1 e0       	ldi	r26, 0x01	; 1
+  54:	b0 e0       	ldi	r27, 0x00	; 0
+  56:	c3 ec       	ldi	r28, 0xC3	; 195
+  58:	d9 e0       	ldi	r29, 0x09	; 9
+  5a:	f2 e0       	ldi	r31, 0x02	; 2
+  5c:	4f 2e       	mov	r4, r31
+  5e:	51 2c       	mov	r5, r1
+  60:	e1 ec       	ldi	r30, 0xC1	; 193
+  62:	2e 2e       	mov	r2, r30
+  64:	e9 e0       	ldi	r30, 0x09	; 9
+  66:	3e 2e       	mov	r3, r30
+  68:	7f eb       	ldi	r23, 0xBF	; 191
+  6a:	a7 2e       	mov	r10, r23
+  6c:	79 e0       	ldi	r23, 0x09	; 9
+  6e:	b7 2e       	mov	r11, r23
+  70:	67 e0       	ldi	r22, 0x07	; 7
+  72:	86 2e       	mov	r8, r22
+  74:	91 2c       	mov	r9, r1
+  76:	5c eb       	ldi	r21, 0xBC	; 188
+  78:	65 2e       	mov	r6, r21
+  7a:	59 e0       	ldi	r21, 0x09	; 9
+  7c:	75 2e       	mov	r7, r21
+  7e:	0c e0       	ldi	r16, 0x0C	; 12
+  80:	10 e0       	ldi	r17, 0x00	; 0
+  82:	97 eb       	ldi	r25, 0xB7	; 183
+  84:	e9 2e       	mov	r14, r25
+  86:	99 e0       	ldi	r25, 0x09	; 9
+  88:	f9 2e       	mov	r15, r25
+  8a:	82 e1       	ldi	r24, 0x12	; 18
+  8c:	c8 2e       	mov	r12, r24
+  8e:	d1 2c       	mov	r13, r1
+  90:	0f c0       	rjmp	.+30     	; 0xb0 <__stack+0x11>
+  92:	88 b3       	in	r24, 0x18	; 24
+  94:	84 27       	eor	r24, r20
+  96:	88 bb       	out	0x18, r24	; 24
+  98:	cd 01       	movw	r24, r26
+  9a:	01 97       	sbiw	r24, 0x01	; 1
+  9c:	f1 f7       	brne	.-4      	; 0x9a <__SREG__+0x5b>
+    _delay_ms(0);
+    PORTB ^= 1 << PB0;
+  9e:	88 b3       	in	r24, 0x18	; 24
+  a0:	84 27       	eor	r24, r20
+  a2:	88 bb       	out	0x18, r24	; 24
+  a4:	84 ec       	ldi	r24, 0xC4	; 196
+  a6:	99 e0       	ldi	r25, 0x09	; 9
+  a8:	01 97       	sbiw	r24, 0x01	; 1
+  aa:	f1 f7       	brne	.-4      	; 0xa8 <__stack+0x9>
+int main() {
+    DDRB = 0xFF;     // Declare Port B as output
+	PORTB = 0x00;    // Turn all LEDs off
+
+	while(1) {
+		for (int i = 0; i < 100; i++) {
+  ac:	2f 5f       	subi	r18, 0xFF	; 255
+  ae:	3f 4f       	sbci	r19, 0xFF	; 255
+  b0:	24 36       	cpi	r18, 0x64	; 100
+  b2:	31 05       	cpc	r19, r1
+  b4:	74 f3       	brlt	.-36     	; 0x92 <__SREG__+0x53>
+  b6:	20 e0       	ldi	r18, 0x00	; 0
+  b8:	30 e0       	ldi	r19, 0x00	; 0
+    _delay_ms(0);
+    PORTB ^= 1 << PB0;
+    _delay_ms(10);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+  ba:	88 b3       	in	r24, 0x18	; 24
+  bc:	84 27       	eor	r24, r20
+  be:	88 bb       	out	0x18, r24	; 24
+  c0:	cd 01       	movw	r24, r26
+  c2:	01 97       	sbiw	r24, 0x01	; 1
+  c4:	f1 f7       	brne	.-4      	; 0xc2 <__stack+0x23>
+    _delay_ms(0.000559017);
+    PORTB ^= 1 << PB0;
+  c6:	88 b3       	in	r24, 0x18	; 24
+  c8:	84 27       	eor	r24, r20
+  ca:	88 bb       	out	0x18, r24	; 24
+  cc:	ce 01       	movw	r24, r28
+  ce:	01 97       	sbiw	r24, 0x01	; 1
+  d0:	f1 f7       	brne	.-4      	; 0xce <__stack+0x2f>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0);
+    PORTB ^= 1 << PB0;
+    _delay_ms(10);
+}
+for (int i = 0; i < 100; i++) {
+  d2:	2f 5f       	subi	r18, 0xFF	; 255
+  d4:	3f 4f       	sbci	r19, 0xFF	; 255
+  d6:	24 36       	cpi	r18, 0x64	; 100
+  d8:	31 05       	cpc	r19, r1
+  da:	79 f7       	brne	.-34     	; 0xba <__stack+0x1b>
+  dc:	20 e0       	ldi	r18, 0x00	; 0
+  de:	30 e0       	ldi	r19, 0x00	; 0
+    _delay_ms(0.000559017);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.99944);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+  e0:	88 b3       	in	r24, 0x18	; 24
+  e2:	84 27       	eor	r24, r20
+  e4:	88 bb       	out	0x18, r24	; 24
+  e6:	cd 01       	movw	r24, r26
+  e8:	01 97       	sbiw	r24, 0x01	; 1
+  ea:	f1 f7       	brne	.-4      	; 0xe8 <__stack+0x49>
+    _delay_ms(0.00316228);
+    PORTB ^= 1 << PB0;
+  ec:	88 b3       	in	r24, 0x18	; 24
+  ee:	84 27       	eor	r24, r20
+  f0:	88 bb       	out	0x18, r24	; 24
+  f2:	ce 01       	movw	r24, r28
+  f4:	01 97       	sbiw	r24, 0x01	; 1
+  f6:	f1 f7       	brne	.-4      	; 0xf4 <__stack+0x55>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0.000559017);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.99944);
+}
+for (int i = 0; i < 100; i++) {
+  f8:	2f 5f       	subi	r18, 0xFF	; 255
+  fa:	3f 4f       	sbci	r19, 0xFF	; 255
+  fc:	24 36       	cpi	r18, 0x64	; 100
+  fe:	31 05       	cpc	r19, r1
+ 100:	79 f7       	brne	.-34     	; 0xe0 <__stack+0x41>
+ 102:	20 e0       	ldi	r18, 0x00	; 0
+ 104:	30 e0       	ldi	r19, 0x00	; 0
+    _delay_ms(0.00316228);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.99684);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+ 106:	88 b3       	in	r24, 0x18	; 24
+ 108:	84 27       	eor	r24, r20
+ 10a:	88 bb       	out	0x18, r24	; 24
+ 10c:	c2 01       	movw	r24, r4
+ 10e:	01 97       	sbiw	r24, 0x01	; 1
+ 110:	f1 f7       	brne	.-4      	; 0x10e <__stack+0x6f>
+    _delay_ms(0.00871421);
+    PORTB ^= 1 << PB0;
+ 112:	88 b3       	in	r24, 0x18	; 24
+ 114:	84 27       	eor	r24, r20
+ 116:	88 bb       	out	0x18, r24	; 24
+ 118:	c1 01       	movw	r24, r2
+ 11a:	01 97       	sbiw	r24, 0x01	; 1
+ 11c:	f1 f7       	brne	.-4      	; 0x11a <__stack+0x7b>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0.00316228);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.99684);
+}
+for (int i = 0; i < 100; i++) {
+ 11e:	2f 5f       	subi	r18, 0xFF	; 255
+ 120:	3f 4f       	sbci	r19, 0xFF	; 255
+ 122:	24 36       	cpi	r18, 0x64	; 100
+ 124:	31 05       	cpc	r19, r1
+ 126:	79 f7       	brne	.-34     	; 0x106 <__stack+0x67>
+ 128:	20 e0       	ldi	r18, 0x00	; 0
+ 12a:	30 e0       	ldi	r19, 0x00	; 0
+    _delay_ms(0.00871421);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.99129);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+ 12c:	88 b3       	in	r24, 0x18	; 24
+ 12e:	84 27       	eor	r24, r20
+ 130:	88 bb       	out	0x18, r24	; 24
+ 132:	84 e0       	ldi	r24, 0x04	; 4
+ 134:	90 e0       	ldi	r25, 0x00	; 0
+ 136:	01 97       	sbiw	r24, 0x01	; 1
+ 138:	f1 f7       	brne	.-4      	; 0x136 <__stack+0x97>
+    _delay_ms(0.0178885);
+    PORTB ^= 1 << PB0;
+ 13a:	88 b3       	in	r24, 0x18	; 24
+ 13c:	84 27       	eor	r24, r20
+ 13e:	88 bb       	out	0x18, r24	; 24
+ 140:	c5 01       	movw	r24, r10
+ 142:	01 97       	sbiw	r24, 0x01	; 1
+ 144:	f1 f7       	brne	.-4      	; 0x142 <__stack+0xa3>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0.00871421);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.99129);
+}
+for (int i = 0; i < 100; i++) {
+ 146:	2f 5f       	subi	r18, 0xFF	; 255
+ 148:	3f 4f       	sbci	r19, 0xFF	; 255
+ 14a:	24 36       	cpi	r18, 0x64	; 100
+ 14c:	31 05       	cpc	r19, r1
+ 14e:	71 f7       	brne	.-36     	; 0x12c <__stack+0x8d>
+ 150:	20 e0       	ldi	r18, 0x00	; 0
+ 152:	30 e0       	ldi	r19, 0x00	; 0
+    _delay_ms(0.0178885);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.98211);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+ 154:	88 b3       	in	r24, 0x18	; 24
+ 156:	84 27       	eor	r24, r20
+ 158:	88 bb       	out	0x18, r24	; 24
+ 15a:	c4 01       	movw	r24, r8
+ 15c:	01 97       	sbiw	r24, 0x01	; 1
+ 15e:	f1 f7       	brne	.-4      	; 0x15c <__stack+0xbd>
+    _delay_ms(0.03125);
+    PORTB ^= 1 << PB0;
+ 160:	88 b3       	in	r24, 0x18	; 24
+ 162:	84 27       	eor	r24, r20
+ 164:	88 bb       	out	0x18, r24	; 24
+ 166:	c3 01       	movw	r24, r6
+ 168:	01 97       	sbiw	r24, 0x01	; 1
+ 16a:	f1 f7       	brne	.-4      	; 0x168 <__stack+0xc9>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0.0178885);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.98211);
+}
+for (int i = 0; i < 100; i++) {
+ 16c:	2f 5f       	subi	r18, 0xFF	; 255
+ 16e:	3f 4f       	sbci	r19, 0xFF	; 255
+ 170:	24 36       	cpi	r18, 0x64	; 100
+ 172:	31 05       	cpc	r19, r1
+ 174:	79 f7       	brne	.-34     	; 0x154 <__stack+0xb5>
+ 176:	20 e0       	ldi	r18, 0x00	; 0
+ 178:	30 e0       	ldi	r19, 0x00	; 0
+    _delay_ms(0.03125);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.96875);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+ 17a:	88 b3       	in	r24, 0x18	; 24
+ 17c:	84 27       	eor	r24, r20
+ 17e:	88 bb       	out	0x18, r24	; 24
+ 180:	c8 01       	movw	r24, r16
+ 182:	01 97       	sbiw	r24, 0x01	; 1
+ 184:	f1 f7       	brne	.-4      	; 0x182 <__stack+0xe3>
+    _delay_ms(0.049295);
+    PORTB ^= 1 << PB0;
+ 186:	88 b3       	in	r24, 0x18	; 24
+ 188:	84 27       	eor	r24, r20
+ 18a:	88 bb       	out	0x18, r24	; 24
+ 18c:	c7 01       	movw	r24, r14
+ 18e:	01 97       	sbiw	r24, 0x01	; 1
+ 190:	f1 f7       	brne	.-4      	; 0x18e <__stack+0xef>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0.03125);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.96875);
+}
+for (int i = 0; i < 100; i++) {
+ 192:	2f 5f       	subi	r18, 0xFF	; 255
+ 194:	3f 4f       	sbci	r19, 0xFF	; 255
+ 196:	24 36       	cpi	r18, 0x64	; 100
+ 198:	31 05       	cpc	r19, r1
+ 19a:	79 f7       	brne	.-34     	; 0x17a <__stack+0xdb>
+ 19c:	20 e0       	ldi	r18, 0x00	; 0
+ 19e:	30 e0       	ldi	r19, 0x00	; 0
+ 1a0:	61 eb       	ldi	r22, 0xB1	; 177
+ 1a2:	79 e0       	ldi	r23, 0x09	; 9
+    _delay_ms(0.049295);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.9507);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+ 1a4:	88 b3       	in	r24, 0x18	; 24
+ 1a6:	84 27       	eor	r24, r20
+ 1a8:	88 bb       	out	0x18, r24	; 24
+ 1aa:	c6 01       	movw	r24, r12
+ 1ac:	01 97       	sbiw	r24, 0x01	; 1
+ 1ae:	f1 f7       	brne	.-4      	; 0x1ac <__stack+0x10d>
+    _delay_ms(0.072472);
+    PORTB ^= 1 << PB0;
+ 1b0:	88 b3       	in	r24, 0x18	; 24
+ 1b2:	84 27       	eor	r24, r20
+ 1b4:	88 bb       	out	0x18, r24	; 24
+ 1b6:	cb 01       	movw	r24, r22
+ 1b8:	01 97       	sbiw	r24, 0x01	; 1
+ 1ba:	f1 f7       	brne	.-4      	; 0x1b8 <__stack+0x119>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0.049295);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.9507);
+}
+for (int i = 0; i < 100; i++) {
+ 1bc:	2f 5f       	subi	r18, 0xFF	; 255
+ 1be:	3f 4f       	sbci	r19, 0xFF	; 255
+ 1c0:	24 36       	cpi	r18, 0x64	; 100
+ 1c2:	31 05       	cpc	r19, r1
+ 1c4:	79 f7       	brne	.-34     	; 0x1a4 <__stack+0x105>
+ 1c6:	20 e0       	ldi	r18, 0x00	; 0
+ 1c8:	30 e0       	ldi	r19, 0x00	; 0
+ 1ca:	e9 e1       	ldi	r30, 0x19	; 25
+ 1cc:	f0 e0       	ldi	r31, 0x00	; 0
+    _delay_ms(0.072472);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.92753);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+ 1ce:	6a ea       	ldi	r22, 0xAA	; 170
+ 1d0:	79 e0       	ldi	r23, 0x09	; 9
+ 1d2:	88 b3       	in	r24, 0x18	; 24
+ 1d4:	84 27       	eor	r24, r20
+ 1d6:	88 bb       	out	0x18, r24	; 24
+ 1d8:	cf 01       	movw	r24, r30
+ 1da:	01 97       	sbiw	r24, 0x01	; 1
+ 1dc:	f1 f7       	brne	.-4      	; 0x1da <__stack+0x13b>
+    _delay_ms(0.101193);
+    PORTB ^= 1 << PB0;
+ 1de:	88 b3       	in	r24, 0x18	; 24
+ 1e0:	84 27       	eor	r24, r20
+ 1e2:	88 bb       	out	0x18, r24	; 24
+ 1e4:	cb 01       	movw	r24, r22
+ 1e6:	01 97       	sbiw	r24, 0x01	; 1
+ 1e8:	f1 f7       	brne	.-4      	; 0x1e6 <__stack+0x147>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0.072472);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.92753);
+}
+for (int i = 0; i < 100; i++) {
+ 1ea:	2f 5f       	subi	r18, 0xFF	; 255
+ 1ec:	3f 4f       	sbci	r19, 0xFF	; 255
+ 1ee:	24 36       	cpi	r18, 0x64	; 100
+ 1f0:	31 05       	cpc	r19, r1
+ 1f2:	79 f7       	brne	.-34     	; 0x1d2 <__stack+0x133>
+ 1f4:	20 e0       	ldi	r18, 0x00	; 0
+ 1f6:	30 e0       	ldi	r19, 0x00	; 0
+ 1f8:	e1 e2       	ldi	r30, 0x21	; 33
+ 1fa:	f0 e0       	ldi	r31, 0x00	; 0
+    _delay_ms(0.101193);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.89881);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+ 1fc:	62 ea       	ldi	r22, 0xA2	; 162
+ 1fe:	79 e0       	ldi	r23, 0x09	; 9
+ 200:	88 b3       	in	r24, 0x18	; 24
+ 202:	84 27       	eor	r24, r20
+ 204:	88 bb       	out	0x18, r24	; 24
+ 206:	cf 01       	movw	r24, r30
+ 208:	01 97       	sbiw	r24, 0x01	; 1
+ 20a:	f1 f7       	brne	.-4      	; 0x208 <__stack+0x169>
+    _delay_ms(0.135841);
+    PORTB ^= 1 << PB0;
+ 20c:	88 b3       	in	r24, 0x18	; 24
+ 20e:	84 27       	eor	r24, r20
+ 210:	88 bb       	out	0x18, r24	; 24
+ 212:	cb 01       	movw	r24, r22
+ 214:	01 97       	sbiw	r24, 0x01	; 1
+ 216:	f1 f7       	brne	.-4      	; 0x214 <__stack+0x175>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0.101193);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.89881);
+}
+for (int i = 0; i < 100; i++) {
+ 218:	2f 5f       	subi	r18, 0xFF	; 255
+ 21a:	3f 4f       	sbci	r19, 0xFF	; 255
+ 21c:	24 36       	cpi	r18, 0x64	; 100
+ 21e:	31 05       	cpc	r19, r1
+ 220:	79 f7       	brne	.-34     	; 0x200 <__stack+0x161>
+ 222:	20 e0       	ldi	r18, 0x00	; 0
+ 224:	30 e0       	ldi	r19, 0x00	; 0
+ 226:	ec e2       	ldi	r30, 0x2C	; 44
+ 228:	f0 e0       	ldi	r31, 0x00	; 0
+    _delay_ms(0.135841);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.86416);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+ 22a:	67 e9       	ldi	r22, 0x97	; 151
+ 22c:	79 e0       	ldi	r23, 0x09	; 9
+ 22e:	88 b3       	in	r24, 0x18	; 24
+ 230:	84 27       	eor	r24, r20
+ 232:	88 bb       	out	0x18, r24	; 24
+ 234:	cf 01       	movw	r24, r30
+ 236:	01 97       	sbiw	r24, 0x01	; 1
+ 238:	f1 f7       	brne	.-4      	; 0x236 <__stack+0x197>
+    _delay_ms(0.176777);
+    PORTB ^= 1 << PB0;
+ 23a:	88 b3       	in	r24, 0x18	; 24
+ 23c:	84 27       	eor	r24, r20
+ 23e:	88 bb       	out	0x18, r24	; 24
+ 240:	cb 01       	movw	r24, r22
+ 242:	01 97       	sbiw	r24, 0x01	; 1
+ 244:	f1 f7       	brne	.-4      	; 0x242 <__stack+0x1a3>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0.135841);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.86416);
+}
+for (int i = 0; i < 100; i++) {
+ 246:	2f 5f       	subi	r18, 0xFF	; 255
+ 248:	3f 4f       	sbci	r19, 0xFF	; 255
+ 24a:	24 36       	cpi	r18, 0x64	; 100
+ 24c:	31 05       	cpc	r19, r1
+ 24e:	79 f7       	brne	.-34     	; 0x22e <__stack+0x18f>
+ 250:	20 e0       	ldi	r18, 0x00	; 0
+ 252:	30 e0       	ldi	r19, 0x00	; 0
+ 254:	e1 e2       	ldi	r30, 0x21	; 33
+ 256:	f0 e0       	ldi	r31, 0x00	; 0
+    _delay_ms(0.176777);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.82322);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+ 258:	62 ea       	ldi	r22, 0xA2	; 162
+ 25a:	79 e0       	ldi	r23, 0x09	; 9
+ 25c:	88 b3       	in	r24, 0x18	; 24
+ 25e:	84 27       	eor	r24, r20
+ 260:	88 bb       	out	0x18, r24	; 24
+ 262:	cf 01       	movw	r24, r30
+ 264:	01 97       	sbiw	r24, 0x01	; 1
+ 266:	f1 f7       	brne	.-4      	; 0x264 <__stack+0x1c5>
+    _delay_ms(0.135841);
+    PORTB ^= 1 << PB0;
+ 268:	88 b3       	in	r24, 0x18	; 24
+ 26a:	84 27       	eor	r24, r20
+ 26c:	88 bb       	out	0x18, r24	; 24
+ 26e:	cb 01       	movw	r24, r22
+ 270:	01 97       	sbiw	r24, 0x01	; 1
+ 272:	f1 f7       	brne	.-4      	; 0x270 <__stack+0x1d1>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0.176777);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.82322);
+}
+for (int i = 0; i < 100; i++) {
+ 274:	2f 5f       	subi	r18, 0xFF	; 255
+ 276:	3f 4f       	sbci	r19, 0xFF	; 255
+ 278:	24 36       	cpi	r18, 0x64	; 100
+ 27a:	31 05       	cpc	r19, r1
+ 27c:	79 f7       	brne	.-34     	; 0x25c <__stack+0x1bd>
+ 27e:	20 e0       	ldi	r18, 0x00	; 0
+ 280:	30 e0       	ldi	r19, 0x00	; 0
+ 282:	e9 e1       	ldi	r30, 0x19	; 25
+ 284:	f0 e0       	ldi	r31, 0x00	; 0
+    _delay_ms(0.135841);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.86416);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+ 286:	6a ea       	ldi	r22, 0xAA	; 170
+ 288:	79 e0       	ldi	r23, 0x09	; 9
+ 28a:	88 b3       	in	r24, 0x18	; 24
+ 28c:	84 27       	eor	r24, r20
+ 28e:	88 bb       	out	0x18, r24	; 24
+ 290:	cf 01       	movw	r24, r30
+ 292:	01 97       	sbiw	r24, 0x01	; 1
+ 294:	f1 f7       	brne	.-4      	; 0x292 <__stack+0x1f3>
+    _delay_ms(0.101193);
+    PORTB ^= 1 << PB0;
+ 296:	88 b3       	in	r24, 0x18	; 24
+ 298:	84 27       	eor	r24, r20
+ 29a:	88 bb       	out	0x18, r24	; 24
+ 29c:	cb 01       	movw	r24, r22
+ 29e:	01 97       	sbiw	r24, 0x01	; 1
+ 2a0:	f1 f7       	brne	.-4      	; 0x29e <__stack+0x1ff>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0.135841);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.86416);
+}
+for (int i = 0; i < 100; i++) {
+ 2a2:	2f 5f       	subi	r18, 0xFF	; 255
+ 2a4:	3f 4f       	sbci	r19, 0xFF	; 255
+ 2a6:	24 36       	cpi	r18, 0x64	; 100
+ 2a8:	31 05       	cpc	r19, r1
+ 2aa:	79 f7       	brne	.-34     	; 0x28a <__stack+0x1eb>
+ 2ac:	20 e0       	ldi	r18, 0x00	; 0
+ 2ae:	30 e0       	ldi	r19, 0x00	; 0
+ 2b0:	61 eb       	ldi	r22, 0xB1	; 177
+ 2b2:	79 e0       	ldi	r23, 0x09	; 9
+    _delay_ms(0.101193);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.89881);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+ 2b4:	88 b3       	in	r24, 0x18	; 24
+ 2b6:	84 27       	eor	r24, r20
+ 2b8:	88 bb       	out	0x18, r24	; 24
+ 2ba:	c6 01       	movw	r24, r12
+ 2bc:	01 97       	sbiw	r24, 0x01	; 1
+ 2be:	f1 f7       	brne	.-4      	; 0x2bc <__stack+0x21d>
+    _delay_ms(0.072472);
+    PORTB ^= 1 << PB0;
+ 2c0:	88 b3       	in	r24, 0x18	; 24
+ 2c2:	84 27       	eor	r24, r20
+ 2c4:	88 bb       	out	0x18, r24	; 24
+ 2c6:	cb 01       	movw	r24, r22
+ 2c8:	01 97       	sbiw	r24, 0x01	; 1
+ 2ca:	f1 f7       	brne	.-4      	; 0x2c8 <__stack+0x229>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0.101193);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.89881);
+}
+for (int i = 0; i < 100; i++) {
+ 2cc:	2f 5f       	subi	r18, 0xFF	; 255
+ 2ce:	3f 4f       	sbci	r19, 0xFF	; 255
+ 2d0:	24 36       	cpi	r18, 0x64	; 100
+ 2d2:	31 05       	cpc	r19, r1
+ 2d4:	79 f7       	brne	.-34     	; 0x2b4 <__stack+0x215>
+ 2d6:	20 e0       	ldi	r18, 0x00	; 0
+ 2d8:	30 e0       	ldi	r19, 0x00	; 0
+    _delay_ms(0.072472);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.92753);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+ 2da:	88 b3       	in	r24, 0x18	; 24
+ 2dc:	84 27       	eor	r24, r20
+ 2de:	88 bb       	out	0x18, r24	; 24
+ 2e0:	c8 01       	movw	r24, r16
+ 2e2:	01 97       	sbiw	r24, 0x01	; 1
+ 2e4:	f1 f7       	brne	.-4      	; 0x2e2 <__stack+0x243>
+    _delay_ms(0.049295);
+    PORTB ^= 1 << PB0;
+ 2e6:	88 b3       	in	r24, 0x18	; 24
+ 2e8:	84 27       	eor	r24, r20
+ 2ea:	88 bb       	out	0x18, r24	; 24
+ 2ec:	c7 01       	movw	r24, r14
+ 2ee:	01 97       	sbiw	r24, 0x01	; 1
+ 2f0:	f1 f7       	brne	.-4      	; 0x2ee <__stack+0x24f>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0.072472);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.92753);
+}
+for (int i = 0; i < 100; i++) {
+ 2f2:	2f 5f       	subi	r18, 0xFF	; 255
+ 2f4:	3f 4f       	sbci	r19, 0xFF	; 255
+ 2f6:	24 36       	cpi	r18, 0x64	; 100
+ 2f8:	31 05       	cpc	r19, r1
+ 2fa:	79 f7       	brne	.-34     	; 0x2da <__stack+0x23b>
+ 2fc:	20 e0       	ldi	r18, 0x00	; 0
+ 2fe:	30 e0       	ldi	r19, 0x00	; 0
+    _delay_ms(0.049295);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.9507);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+ 300:	88 b3       	in	r24, 0x18	; 24
+ 302:	84 27       	eor	r24, r20
+ 304:	88 bb       	out	0x18, r24	; 24
+ 306:	c4 01       	movw	r24, r8
+ 308:	01 97       	sbiw	r24, 0x01	; 1
+ 30a:	f1 f7       	brne	.-4      	; 0x308 <__stack+0x269>
+    _delay_ms(0.03125);
+    PORTB ^= 1 << PB0;
+ 30c:	88 b3       	in	r24, 0x18	; 24
+ 30e:	84 27       	eor	r24, r20
+ 310:	88 bb       	out	0x18, r24	; 24
+ 312:	c3 01       	movw	r24, r6
+ 314:	01 97       	sbiw	r24, 0x01	; 1
+ 316:	f1 f7       	brne	.-4      	; 0x314 <__stack+0x275>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0.049295);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.9507);
+}
+for (int i = 0; i < 100; i++) {
+ 318:	2f 5f       	subi	r18, 0xFF	; 255
+ 31a:	3f 4f       	sbci	r19, 0xFF	; 255
+ 31c:	24 36       	cpi	r18, 0x64	; 100
+ 31e:	31 05       	cpc	r19, r1
+ 320:	79 f7       	brne	.-34     	; 0x300 <__stack+0x261>
+ 322:	20 e0       	ldi	r18, 0x00	; 0
+ 324:	30 e0       	ldi	r19, 0x00	; 0
+    _delay_ms(0.03125);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.96875);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+ 326:	88 b3       	in	r24, 0x18	; 24
+ 328:	84 27       	eor	r24, r20
+ 32a:	88 bb       	out	0x18, r24	; 24
+ 32c:	84 e0       	ldi	r24, 0x04	; 4
+ 32e:	90 e0       	ldi	r25, 0x00	; 0
+ 330:	01 97       	sbiw	r24, 0x01	; 1
+ 332:	f1 f7       	brne	.-4      	; 0x330 <__stack+0x291>
+    _delay_ms(0.0178885);
+    PORTB ^= 1 << PB0;
+ 334:	88 b3       	in	r24, 0x18	; 24
+ 336:	84 27       	eor	r24, r20
+ 338:	88 bb       	out	0x18, r24	; 24
+ 33a:	c5 01       	movw	r24, r10
+ 33c:	01 97       	sbiw	r24, 0x01	; 1
+ 33e:	f1 f7       	brne	.-4      	; 0x33c <__stack+0x29d>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0.03125);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.96875);
+}
+for (int i = 0; i < 100; i++) {
+ 340:	2f 5f       	subi	r18, 0xFF	; 255
+ 342:	3f 4f       	sbci	r19, 0xFF	; 255
+ 344:	24 36       	cpi	r18, 0x64	; 100
+ 346:	31 05       	cpc	r19, r1
+ 348:	71 f7       	brne	.-36     	; 0x326 <__stack+0x287>
+ 34a:	20 e0       	ldi	r18, 0x00	; 0
+ 34c:	30 e0       	ldi	r19, 0x00	; 0
+    _delay_ms(0.0178885);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.98211);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+ 34e:	88 b3       	in	r24, 0x18	; 24
+ 350:	84 27       	eor	r24, r20
+ 352:	88 bb       	out	0x18, r24	; 24
+ 354:	c2 01       	movw	r24, r4
+ 356:	01 97       	sbiw	r24, 0x01	; 1
+ 358:	f1 f7       	brne	.-4      	; 0x356 <__stack+0x2b7>
+    _delay_ms(0.00871421);
+    PORTB ^= 1 << PB0;
+ 35a:	88 b3       	in	r24, 0x18	; 24
+ 35c:	84 27       	eor	r24, r20
+ 35e:	88 bb       	out	0x18, r24	; 24
+ 360:	c1 01       	movw	r24, r2
+ 362:	01 97       	sbiw	r24, 0x01	; 1
+ 364:	f1 f7       	brne	.-4      	; 0x362 <__stack+0x2c3>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0.0178885);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.98211);
+}
+for (int i = 0; i < 100; i++) {
+ 366:	2f 5f       	subi	r18, 0xFF	; 255
+ 368:	3f 4f       	sbci	r19, 0xFF	; 255
+ 36a:	24 36       	cpi	r18, 0x64	; 100
+ 36c:	31 05       	cpc	r19, r1
+ 36e:	79 f7       	brne	.-34     	; 0x34e <__stack+0x2af>
+ 370:	20 e0       	ldi	r18, 0x00	; 0
+ 372:	30 e0       	ldi	r19, 0x00	; 0
+    _delay_ms(0.00871421);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.99129);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+ 374:	88 b3       	in	r24, 0x18	; 24
+ 376:	84 27       	eor	r24, r20
+ 378:	88 bb       	out	0x18, r24	; 24
+ 37a:	cd 01       	movw	r24, r26
+ 37c:	01 97       	sbiw	r24, 0x01	; 1
+ 37e:	f1 f7       	brne	.-4      	; 0x37c <__stack+0x2dd>
+    _delay_ms(0.00316228);
+    PORTB ^= 1 << PB0;
+ 380:	88 b3       	in	r24, 0x18	; 24
+ 382:	84 27       	eor	r24, r20
+ 384:	88 bb       	out	0x18, r24	; 24
+ 386:	ce 01       	movw	r24, r28
+ 388:	01 97       	sbiw	r24, 0x01	; 1
+ 38a:	f1 f7       	brne	.-4      	; 0x388 <__stack+0x2e9>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0.00871421);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.99129);
+}
+for (int i = 0; i < 100; i++) {
+ 38c:	2f 5f       	subi	r18, 0xFF	; 255
+ 38e:	3f 4f       	sbci	r19, 0xFF	; 255
+ 390:	24 36       	cpi	r18, 0x64	; 100
+ 392:	31 05       	cpc	r19, r1
+ 394:	79 f7       	brne	.-34     	; 0x374 <__stack+0x2d5>
+ 396:	20 e0       	ldi	r18, 0x00	; 0
+ 398:	30 e0       	ldi	r19, 0x00	; 0
+    _delay_ms(0.00316228);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.99684);
+}
+for (int i = 0; i < 100; i++) {
+    PORTB ^= 1 << PB0;
+ 39a:	88 b3       	in	r24, 0x18	; 24
+ 39c:	84 27       	eor	r24, r20
+ 39e:	88 bb       	out	0x18, r24	; 24
+ 3a0:	cd 01       	movw	r24, r26
+ 3a2:	01 97       	sbiw	r24, 0x01	; 1
+ 3a4:	f1 f7       	brne	.-4      	; 0x3a2 <__stack+0x303>
+    _delay_ms(0.000559017);
+    PORTB ^= 1 << PB0;
+ 3a6:	88 b3       	in	r24, 0x18	; 24
+ 3a8:	84 27       	eor	r24, r20
+ 3aa:	88 bb       	out	0x18, r24	; 24
+ 3ac:	ce 01       	movw	r24, r28
+ 3ae:	01 97       	sbiw	r24, 0x01	; 1
+ 3b0:	f1 f7       	brne	.-4      	; 0x3ae <__stack+0x30f>
+    PORTB ^= 1 << PB0;
+    _delay_ms(0.00316228);
+    PORTB ^= 1 << PB0;
+    _delay_ms(9.99684);
+}
+for (int i = 0; i < 100; i++) {
+ 3b2:	2f 5f       	subi	r18, 0xFF	; 255
+ 3b4:	3f 4f       	sbci	r19, 0xFF	; 255
+ 3b6:	24 36       	cpi	r18, 0x64	; 100
+ 3b8:	31 05       	cpc	r19, r1
+ 3ba:	79 f7       	brne	.-34     	; 0x39a <__stack+0x2fb>
+ 3bc:	20 e0       	ldi	r18, 0x00	; 0
+ 3be:	30 e0       	ldi	r19, 0x00	; 0
+ 3c0:	77 ce       	rjmp	.-786    	; 0xb0 <__stack+0x11>
+
+000003c2 <_exit>:
+ 3c2:	f8 94       	cli
+
+000003c4 <__stop_program>:
+ 3c4:	ff cf       	rjmp	.-2      	; 0x3c4 <__stop_program>
