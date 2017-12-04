@@ -19,14 +19,22 @@
   <FILE>F:\christmas\tree\tree.map</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <loop><FILE>F:\christmas\tree\tree.asm</FILE><LINE>17</LINE></loop>
-  <l1><FILE>F:\christmas\tree\tree.asm</FILE><LINE>19</LINE></l1>
-  <l2><FILE>F:\christmas\tree\tree.asm</FILE><LINE>20</LINE></l2>
-  <delay><FILE>F:\christmas\tree\tree.asm</FILE><LINE>50</LINE></delay>
-  <l3><FILE>F:\christmas\tree\tree.asm</FILE><LINE>32</LINE></l3>
-  <l4><FILE>F:\christmas\tree\tree.asm</FILE><LINE>33</LINE></l4>
-  <d3><FILE>F:\christmas\tree\tree.asm</FILE><LINE>58</LINE></d3>
-  <d1><FILE>F:\christmas\tree\tree.asm</FILE><LINE>53</LINE></d1>
-  <d2><FILE>F:\christmas\tree\tree.asm</FILE><LINE>54</LINE></d2>
+  <loop><FILE>F:\christmas\tree\tree.asm</FILE><LINE>31</LINE></loop>
+  <A><FILE>F:\christmas\tree\tree.asm</FILE><LINE>32</LINE></A>
+  <B><FILE>F:\christmas\tree\tree.asm</FILE><LINE>33</LINE></B>
+  <delay><FILE>F:\christmas\tree\tree.asm</FILE><LINE>151</LINE></delay>
+  <C><FILE>F:\christmas\tree\tree.asm</FILE><LINE>51</LINE></C>
+  <D><FILE>F:\christmas\tree\tree.asm</FILE><LINE>52</LINE></D>
+  <E><FILE>F:\christmas\tree\tree.asm</FILE><LINE>70</LINE></E>
+  <F><FILE>F:\christmas\tree\tree.asm</FILE><LINE>71</LINE></F>
+  <G><FILE>F:\christmas\tree\tree.asm</FILE><LINE>89</LINE></G>
+  <H><FILE>F:\christmas\tree\tree.asm</FILE><LINE>90</LINE></H>
+  <I><FILE>F:\christmas\tree\tree.asm</FILE><LINE>108</LINE></I>
+  <J><FILE>F:\christmas\tree\tree.asm</FILE><LINE>109</LINE></J>
+  <K><FILE>F:\christmas\tree\tree.asm</FILE><LINE>127</LINE></K>
+  <L><FILE>F:\christmas\tree\tree.asm</FILE><LINE>128</LINE></L>
+  <d3><FILE>F:\christmas\tree\tree.asm</FILE><LINE>159</LINE></d3>
+  <d1><FILE>F:\christmas\tree\tree.asm</FILE><LINE>154</LINE></d1>
+  <d2><FILE>F:\christmas\tree\tree.asm</FILE><LINE>155</LINE></d2>
  </LABELS>
 </ASSEMBLER_INFO>
