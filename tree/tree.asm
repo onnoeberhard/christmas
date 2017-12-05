@@ -1,10 +1,10 @@
 .include "tn13adef.inc"
 
 .equ DT = 0xF
-.equ CYCLES = 1
+.equ CYCLES = 3
 .equ PERIOD = 0xFF
-.equ BRIGHT = 0xF0
-.equ MIDDLE = 0x78
+.equ BRIGHT = 0xFF
+.equ MIDDLE = 0x80
 .equ DARK = 0x00
 
 .equ LEDS = PORTB    ; PORTB: LEDs
@@ -64,12 +64,12 @@ D:	cbi LEDS, L0         ; Light L0
     dec count            ; One cycle has passed
     brne D               ; Repeat same brightness if there are still cycles
 	inc B0               ; Increment the brightness for L0
-	dec B1               ; Increment the brightness for L1
-	cp B0, B1            ; Repeat if B1 is still greater than B0
+	dec B1               ; Decrement the brightness for L1
+	cp B0, B1            ; Repeat if B0 is still lower than B1
     brlo C
 E:  ldi count, CYCLES    ; Reset cycles
-F:	cbi LEDS, L0         ; Light PB0
-	cbi LEDS, L1         ; Light PB1
+F:	cbi LEDS, L0         ; Light L0
+	cbi LEDS, L1         ; Light L1
     mov time, B1         ; Delay for the shortest time (B1)
     rcall delay
     sbi LEDS, L1         ; Extinguish L1
@@ -83,12 +83,12 @@ F:	cbi LEDS, L0         ; Light PB0
     dec count            ; One cycle has passed
     brne F               ; Repeat same brightness if there are still cycles
 	inc B0               ; Increment the brightness for L0
-	dec B1               ; Increment the brightness for L1
+	dec B1               ; Decrement the brightness for L1
 	cpi B0, BRIGHT       ; Repeat if L0 has not reached full brightness.
     brne E
 G:  ldi count, CYCLES    ; Reset cycles
-H:	cbi LEDS, L0         ; Light PB0
-	cbi LEDS, L1         ; Light PB1
+H:	cbi LEDS, L0         ; Light L0
+	cbi LEDS, L1         ; Light L1
     mov time, B1         ; Delay for the shortest time (B1)
     rcall delay
     sbi LEDS, L1         ; Extinguish L1
@@ -101,13 +101,13 @@ H:	cbi LEDS, L0         ; Light PB0
     rcall delay
     dec count            ; One cycle has passed
     brne H               ; Repeat same brightness if there are still cycles
-	dec B0               ; Increment the brightness for L0
-	dec B1               ; Increment the brightness for L1
-	cpi B1, DARK         ; Repeat if L0 has not reached full brightness.
+	dec B0               ; Decrement the brightness for L0
+	dec B1               ; Decrement the brightness for L1
+	cpi B1, DARK         ; Repeat if L1 has not reached full darkness
     brne G
 I:  ldi count, CYCLES    ; Reset cycles
-J:	cbi LEDS, L0         ; Light PB0
-	cbi LEDS, L1         ; Light PB1
+J:	cbi LEDS, L0         ; Light L0
+	cbi LEDS, L1         ; Light L1
     mov time, B1         ; Delay for the shortest time (B1)
     rcall delay
     sbi LEDS, L1         ; Extinguish L1
@@ -120,13 +120,13 @@ J:	cbi LEDS, L0         ; Light PB0
     rcall delay
     dec count            ; One cycle has passed
     brne J               ; Repeat same brightness if there are still cycles
-	dec B0               ; Increment the brightness for L0
+	dec B0               ; Decrement the brightness for L0
 	inc B1               ; Increment the brightness for L1
-	cp B1, B0            ; Repeat if B0 is still greater than B1
+	cp B1, B0            ; Repeat if B1 is still lower than B0
     brlo I
 K:  ldi count, CYCLES    ; Reset cycles
-L:	cbi LEDS, L0         ; Light PB0
-	cbi LEDS, L1         ; Light PB1
+L:	cbi LEDS, L0         ; Light L0
+	cbi LEDS, L1         ; Light L1
     mov time, B0         ; Delay for the shortest time (B0)
     rcall delay
     sbi LEDS, L0         ; Extinguish L0
@@ -139,9 +139,9 @@ L:	cbi LEDS, L0         ; Light PB0
     rcall delay
     dec count            ; One cycle has passed
     brne L               ; Repeat same brightness if there are still cycles
-	dec B0               ; Increment the brightness for L0
+	dec B0               ; Decrement the brightness for L0
 	inc B1               ; Increment the brightness for L1
-	cpi B0, DARK         ; Repeat if B0 is still greater than B1
+	cpi B0, DARK         ; Repeat if B0 has not reached full darkness
     brne K
 
 	rjmp loop

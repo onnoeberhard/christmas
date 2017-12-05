@@ -1,0 +1,44 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.42</VERSION>
+ <DEVICE>ATtiny13A</DEVICE>
+ <WORKING_DIR>F:\christmas\snowflake</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\Appnotes</DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>F:\christmas\snowflake\snowflake.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\Appnotes\tn13adef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>F:\christmas\snowflake\snowflake.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>F:\christmas\snowflake\snowflake.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>F:\christmas\snowflake\snowflake.map</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <loop><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>37</LINE></loop>
+  <A><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>38</LINE></A>
+  <A_><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>39</LINE></A_>
+  <delay><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>315</LINE></delay>
+  <B><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>71</LINE></B>
+  <B_><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>72</LINE></B_>
+  <C><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>106</LINE></C>
+  <C_><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>107</LINE></C_>
+  <D><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>139</LINE></D>
+  <D_><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>140</LINE></D_>
+  <E><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>174</LINE></E>
+  <E_><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>175</LINE></E_>
+  <F><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>207</LINE></F>
+  <F_><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>208</LINE></F_>
+  <G><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>242</LINE></G>
+  <G_><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>243</LINE></G_>
+  <H><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>275</LINE></H>
+  <H_><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>276</LINE></H_>
+  <d3><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>323</LINE></d3>
+  <d1><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>318</LINE></d1>
+  <d2><FILE>F:\christmas\snowflake\snowflake.asm</FILE><LINE>319</LINE></d2>
+ </LABELS>
+</ASSEMBLER_INFO>

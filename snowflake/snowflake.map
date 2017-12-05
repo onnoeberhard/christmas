@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.42  F:\christmas\tree\tree.asm Mon Dec 04 17:57:45 2017
+AVRASM ver. 2.1.42  F:\christmas\snowflake\snowflake.asm Tue Dec 05 06:13:39 2017
 
 
 EQU  SIGNATURE_000 0000001e
@@ -301,25 +301,33 @@ EQU  DARK         00000000
 EQU  LEDS         00000018
 EQU  L0           00000000
 EQU  L1           00000001
+EQU  L2           00000002
+EQU  L3           00000003
 DEF  temp         r16
 DEF  time         r17
 DEF  count        r18
 DEF  B0           r19
 DEF  B1           r20
-CSEG loop         00000008
-CSEG A            00000008
-CSEG B            00000009
-CSEG delay        0000007b
-CSEG C            0000001b
-CSEG D            0000001c
-CSEG E            0000002e
-CSEG F            0000002f
-CSEG G            00000041
-CSEG H            00000042
-CSEG I            00000054
-CSEG J            00000055
-CSEG K            00000067
-CSEG L            00000068
-CSEG d3           00000082
-CSEG d1           0000007d
-CSEG d2           0000007e
+DEF  B2           r21
+DEF  B3           r22
+CSEG loop         0000000a
+CSEG A            0000000a
+CSEG A_           0000000b
+CSEG delay        0000011b
+CSEG B            0000002b
+CSEG B_           0000002c
+CSEG C            0000004e
+CSEG C_           0000004f
+CSEG D            0000006f
+CSEG D_           00000070
+CSEG E            00000092
+CSEG E_           00000093
+CSEG F            000000b3
+CSEG F_           000000b4
+CSEG G            000000d6
+CSEG G_           000000d7
+CSEG H            000000f7
+CSEG H_           000000f8
+CSEG d3           00000122
+CSEG d1           0000011d
+CSEG d2           0000011e
