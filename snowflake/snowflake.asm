@@ -36,9 +36,9 @@ ldi B3, MIDDLE       ; Initialize L3 brightness to MIDDLE (-3/4 phase shift)
 
 loop:
 A:  ldi count, CYCLES    ; Reset cycles
-A_: sbi LEDS, L0     	 ; Light L0
+A_: sbi LEDS, L0         ; Light L0
     sbi LEDS, L1         ; Light L1
-    sbi LEDS, L2     	 ; Light L2
+    sbi LEDS, L2         ; Light L2
     sbi LEDS, L3         ; Light L3
     mov time, B0         ; Delay for the shortest time (B0)
     rcall delay
@@ -69,9 +69,9 @@ A_: sbi LEDS, L0     	 ; Light L0
     cp B1, B2            ; Repeat if L1 is still darker than L2
     brlo A
 B:  ldi count, CYCLES    ; Reset cycles
-B_: sbi LEDS, L0     	 ; Light L0
+B_: sbi LEDS, L0         ; Light L0
     sbi LEDS, L1         ; Light L1
-    sbi LEDS, L2     	 ; Light L2
+    sbi LEDS, L2         ; Light L2
     sbi LEDS, L3         ; Light L3
     mov time, B3         ; Delay for the shortest time (B3)
     rcall delay
@@ -104,9 +104,9 @@ B_: sbi LEDS, L0     	 ; Light L0
     cp B0, B2            ; Repeat if L0 is still darker than L2
     brlo B
 C:  ldi count, CYCLES    ; Reset cycles
-C_: sbi LEDS, L0     	 ; Light L0
+C_: sbi LEDS, L0         ; Light L0
     sbi LEDS, L1         ; Light L1
-    sbi LEDS, L2     	 ; Light L2
+    sbi LEDS, L2         ; Light L2
     sbi LEDS, L3         ; Light L3
     mov time, B3         ; Delay for the shortest time (B3)
     rcall delay
@@ -137,9 +137,9 @@ C_: sbi LEDS, L0     	 ; Light L0
     cp B3, B2            ; Repeat if L3 is still darker than L2
     brlo C
 D:  ldi count, CYCLES    ; Reset cycles
-D_: sbi LEDS, L0     	 ; Light L0
+D_: sbi LEDS, L0         ; Light L0
     sbi LEDS, L1         ; Light L1
-    sbi LEDS, L2     	 ; Light L2
+    sbi LEDS, L2         ; Light L2
     sbi LEDS, L3         ; Light L3
     mov time, B2         ; Delay for the shortest time (B2)
     rcall delay
@@ -172,9 +172,9 @@ D_: sbi LEDS, L0     	 ; Light L0
     cp B3, B1            ; Repeat if L3 is still darker than L1
     brlo D
 E:  ldi count, CYCLES    ; Reset cycles
-E_: sbi LEDS, L0     	 ; Light L0
+E_: sbi LEDS, L0         ; Light L0
     sbi LEDS, L1         ; Light L1
-    sbi LEDS, L2     	 ; Light L2
+    sbi LEDS, L2         ; Light L2
     sbi LEDS, L3         ; Light L3
     mov time, B2         ; Delay for the shortest time (B2)
     rcall delay
@@ -205,9 +205,9 @@ E_: sbi LEDS, L0     	 ; Light L0
     cp B2, B1            ; Repeat if L2 is still darker than L1
     brlo E
 F:  ldi count, CYCLES    ; Reset cycles
-F_: sbi LEDS, L0     	 ; Light L0
+F_: sbi LEDS, L0         ; Light L0
     sbi LEDS, L1         ; Light L1
-    sbi LEDS, L2     	 ; Light L2
+    sbi LEDS, L2         ; Light L2
     sbi LEDS, L3         ; Light L3
     mov time, B1         ; Delay for the shortest time (B1)
     rcall delay
@@ -240,9 +240,9 @@ F_: sbi LEDS, L0     	 ; Light L0
     cp B2, B0            ; Repeat if L2 is still darker than L0
     brlo F
 G:  ldi count, CYCLES    ; Reset cycles
-G_: sbi LEDS, L0     	 ; Light L0
+G_: sbi LEDS, L0         ; Light L0
     sbi LEDS, L1         ; Light L1
-    sbi LEDS, L2     	 ; Light L2
+    sbi LEDS, L2         ; Light L2
     sbi LEDS, L3         ; Light L3
     mov time, B1         ; Delay for the shortest time (B1)
     rcall delay
@@ -273,9 +273,9 @@ G_: sbi LEDS, L0     	 ; Light L0
     cp B2, B3            ; Repeat if L2 is still darker than L3
     brlo G
 H:  ldi count, CYCLES    ; Reset cycles
-H_: sbi LEDS, L0     	 ; Light L0
+H_: sbi LEDS, L0         ; Light L0
     sbi LEDS, L1         ; Light L1
-    sbi LEDS, L2     	 ; Light L2
+    sbi LEDS, L2         ; Light L2
     sbi LEDS, L3         ; Light L3
     mov time, B0         ; Delay for the shortest time (B0)
     rcall delay
@@ -315,9 +315,9 @@ H_: sbi LEDS, L0     	 ; Light L0
 delay:
     tst time
     breq d3
-d1:	ldi temp, DT
-d2:	dec temp
+d1: ldi temp, DT
+d2: dec temp
     brne d2
     dec time
     brne d1
-d3:	ret
+d3: ret
