@@ -24,9 +24,9 @@
 ldi temp, RAMEND     ; Initialize stack pointer
 out SPL, temp
 
-ldi temp, 0xFF    ; Set port B as output
+ldi temp, 0xFF       ; Set port B as output
 out DDRB, temp
-ldi temp, 0x00    ; Turn off all LEDs
+ldi temp, 0x00       ; Turn off all LEDs
 out PORTB, temp
 
 ldi B0, DARK         ; Initialize L0 brightness to DARK
